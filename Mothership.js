@@ -1,4 +1,6 @@
-const Mothership = function (context) {
+import { Player } from "./Player";
+
+export const Mothership = function (context) {
   return function(state, player){
     if(state.health > 0){
       context.fillStyle = Player.color(player)

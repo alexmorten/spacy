@@ -1,4 +1,6 @@
-const Rocket = function(context){
+import { Player } from "./Player";
+
+export const Rocket = function(context){
   return function(state, player){
     context.fillStyle = Player.color(player)
     context.strokeStyle = Player.color(player)

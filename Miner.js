@@ -1,4 +1,6 @@
-const Miner = function (context){
+import { Player } from "./Player";
+
+export const Miner = function (context){
   return function(state, player){
     context.fillStyle = Player.color(player)
     context.fillRect(state.pos.x - 3, state.pos.y -3 , 6,6)

@@ -1,4 +1,4 @@
-const Asteroid = function(context){
+export const Asteroid = function(context){
   return function(state){
     context.fillStyle = "grey"
     context.beginPath()
