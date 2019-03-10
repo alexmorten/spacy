@@ -20,9 +20,9 @@ socket.addEventListener('open', function (event) {
 });
 // Listen for messages
 socket.addEventListener('message', function (event) {
-  ctx.fillStyle = "rgba(0,0,0)"
-  ctx.fillRect(0,0,width, height)
   window.requestAnimationFrame(function () {
+    ctx.fillStyle = "rgba(0,0,0)"
+    ctx.fillRect(0,0,width, height)
     const data = JSON.parse(event.data)
     console.log(data)
     data.players.forEach((player) => {
@@ -47,7 +47,7 @@ socket.addEventListener('message', function (event) {
       asteroid(a)
     })
   })
-  });
+});
 
 const OPTS = {
     fill:           'none',
