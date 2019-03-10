@@ -13,7 +13,7 @@ const rocket = Rocket(ctx)
 const explosion = Explosion(ctx)
 // Create WebSocket connection.
 const socket = new WebSocket('ws://localhost:4000');
-
+let last_event = null;
 // Connection opened
 socket.addEventListener('open', function (event) {
     socket.send('Hello Server!');
@@ -22,32 +22,32 @@ socket.addEventListener('open', function (event) {
 socket.addEventListener('message', function (event) {
   ctx.fillStyle = "rgba(0,0,0)"
   ctx.fillRect(0,0,width, height)
+  window.requestAnimationFrame(function () {
+    const data = JSON.parse(event.data)
+    console.log(data)
+    data.players.forEach((player) => {
+      mothership(player.mothership, player)
 
-  const data = JSON.parse(event.data)
-  console.log(data)
-  data.players.forEach((player) => {
-    mothership(player.mothership, player)
+      player.ships.forEach((s) => {
+        ship(s, player)
+      });
 
-    player.ships.forEach((s) => {
-      ship(s, player)
+      player.miners.forEach((m) => {
+        miner(m, player)
+      });
+
+      player.rockets.forEach((r) => {
+        rocket(r, player)
+      })
+      player.explosions.forEach((e) => {
+        explosion(e, player)
+      })
     });
-
-    player.miners.forEach((m) => {
-      miner(m, player)
-    });
-
-    player.rockets.forEach((r) => {
-      rocket(r, player)
+    data.asteroids.forEach((a) => {
+      asteroid(a)
     })
-    player.explosions.forEach((e) => {
-      explosion(e, player)
-    })
-  });
-  data.asteroids.forEach((a) => {
-    asteroid(a)
   })
-
-});
+  });
 
 const OPTS = {
     fill:           'none',
